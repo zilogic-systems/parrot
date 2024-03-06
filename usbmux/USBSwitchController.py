@@ -27,9 +27,10 @@ from robot.api.deco import keyword
 
 
 class Error(Exception):
-    """Represents an error in the Switch Controller."""
+    """Represents an error in the USB Switch Controller."""
 
-class SwitchController:
+
+class USBSwitchController:
     """A library providing keywords for USB Switch Controller.
 
     The USB Switch can switch 8 device ports to one of the 2 host ports.
@@ -176,7 +177,7 @@ def command_line_args():
 if __name__ == "__main__":
     args = command_line_args()
 
-    switch = SwitchController()
+    switch = USBSwitchController()
     switch.switch_connect(args.device)
 
     if args.reset:
