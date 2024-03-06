@@ -10,5 +10,16 @@ processing, relay controllers, USB mux controllers, audio processing, etc.
 </p>
 ++++++
 
-Parrot is Free Software (licensed under Apache 2.0), and is built and maintained
-by http://zilogic.com[Zilogic Systems].
+Parrot provides various keyword libaries that enhances Robot Framework to
+interface with Embedded System. The architecture of Parrot and the available
+libraries are indicated in the following block diagram.
+
+++++++
+<p align="center">
+  <img width="128" src="docs/blocks.png">
+</p>
+++++++
+
+
+Built with ❤️ in 🇮🇳. Parrot is Free Software (licensed under Apache 2.0), and is
+maintained by http://zilogic.com[Zilogic Systems].
