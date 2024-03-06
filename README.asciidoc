@@ -6,4 +6,5 @@ processing, relay controllers, USB mux controllers, audio processing, etc.
 
 image::logo.png[width="128",align="center"]
 
-Parrot is built and maintained by http://zilogic.com[Zilogic Systems].
+Parrot is Free Software (licensed under Apache 2.0), and is built and maintained
+by http://zilogic.com[Zilogic Systems].
