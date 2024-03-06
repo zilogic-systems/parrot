@@ -16,7 +16,7 @@ libraries are indicated in the following block diagram.
 
 ++++++
 <p align="center">
-  <img width="128" src="docs/blocks.png">
+  <img width="512" src="docs/blocks.png">
 </p>
 ++++++
 
