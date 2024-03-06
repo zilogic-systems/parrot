@@ -4,6 +4,6 @@ Parrot is an Embedded Test Automation Framework based on
 https://robotframework.org/[Robot Framework]. Includes modules for display
 processing, relay controllers, USB mux controllers, audio processing, etc.
 
-image::logo.png[width="128"]
+image::logo.png[width="128",align="center"]
 
 Parrot is built and maintained by http://zilogic.com[Zilogic Systems].
