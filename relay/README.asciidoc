@@ -1,0 +1,13 @@
+= Relay Controller
+
+== Installation
+
+To install from package registry using the following command:
+
+-----
+$ pip install parrot-relaycontroller
+-----
+    
+== Example
+
+Example of using the library in Robot Framework is available `example.robot`.
