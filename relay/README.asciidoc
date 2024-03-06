@@ -2,10 +2,16 @@
 
 == Installation
 
-To install from package registry using the following command:
+To install from package registry use the following command:
 
 -----
 $ pip install parrot-relaycontroller
+-----
+
+To install from git repo use the following command:
+
+-----
+$ pip install .
 -----
     
 == Example
