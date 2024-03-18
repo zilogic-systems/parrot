@@ -10,6 +10,6 @@ Single Relay Test
        Relay OFF  1
 
 All Relay Test
-       Relay Connect /dev/ttyUSB0
+       Relay Connect  /dev/ttyUSB0
        Relay Switch All
        Relay Reset All
