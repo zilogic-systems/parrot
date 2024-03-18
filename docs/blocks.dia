@@ -355,12 +355,13 @@ Controller#</dia:string>
         <dia:point val="29,9.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="27.8863,9.03875;30.1137,9.96125"/>
+        <dia:rectangle val="26.5375,8.54486;31.4625,10.4551"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#DTMF#</dia:string>
+            <dia:string>#Audio Finger
+Printing#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="sans" style="0" name="Helvetica"/>
@@ -369,7 +370,7 @@ Controller#</dia:string>
             <dia:real val="0.98777773976325989"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="29,9.77375"/>
+            <dia:point val="29,9.27986"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000ff"/>
@@ -411,12 +412,12 @@ Controller#</dia:string>
         <dia:point val="38,9.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="36.8775,9.03875;39.1225,9.96125"/>
+        <dia:rectangle val="35.0825,9.03875;40.9175,9.96125"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Audio#</dia:string>
+            <dia:string>#Text To Speech#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="sans" style="0" name="Helvetica"/>
@@ -579,12 +580,13 @@ Controller#</dia:string>
         <dia:point val="38,5.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="37.1375,5.03875;38.8625,5.96125"/>
+        <dia:rectangle val="35.3188,4.54486;40.6812,6.45514"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#OCR#</dia:string>
+            <dia:string>#Image to Text
+(OCR)#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="sans" style="0" name="Helvetica"/>
@@ -593,7 +595,7 @@ Controller#</dia:string>
             <dia:real val="0.98777773976325989"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="38,5.77375"/>
+            <dia:point val="38,5.27986"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000ff"/>
@@ -671,12 +673,12 @@ Controller#</dia:string>
         <dia:point val="38,-1.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.1913,-1.96125;44.8088,-1.03875"/>
+        <dia:rectangle val="30.9237,-1.96125;45.0763,-1.03875"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Parrot Test Automation Framework#</dia:string>
+            <dia:string>#Parrot - Test Automation Framework#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="sans" style="0" name="Helvetica"/>
@@ -894,7 +896,7 @@ Emulator#</dia:string>
         <dia:point val="38,-5.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="35.8594,-5.99584;40.1175,-5.00416"/>
+        <dia:rectangle val="35.8825,-5.96125;40.1175,-5.03875"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -908,7 +910,7 @@ Emulator#</dia:string>
             <dia:real val="0.98777773976325989"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="38,-5.23778"/>
+            <dia:point val="38,-5.22625"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000ff"/>
