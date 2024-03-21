@@ -75,7 +75,7 @@ class RelayController:
         except (AttributeError, serial.serialutil.PortNotOpenError) as error:
             raise RelayError("No Device Connected") from error
 
-    def _relay(self, port: int, turn_on=None) -> bytes:
+    def _relay(self, port: int, turn_on=None) -> bool:
         """Converts cmd to hex and writes to serial Device.
 
         - port - Switch ON the specified Relay.
@@ -97,8 +97,11 @@ class RelayController:
         self.relay_interface.write(cmd.encode())
         delay(0.1)
         self.relay_interface.write("\r\n".encode())
-        output = self.relay_interface.read_until("OK".encode())
-        return output
+        expect = "OK".encode()
+        output = self.relay_interface.read_until(expect)
+        if output == expect:
+            return True
+        return False
 
     @keyword("Relay ON")
     def relay_on(self, port: int) -> None:
