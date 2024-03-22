@@ -119,7 +119,7 @@ class DTMF:
 
         *Example*
 
-        | Verify DTMF Tone    | 1243 | test_tone.wav | 5 | 5 | 0.25 | 0.25 |
+        | Verify DTMF Tone    | 1243 | test_tone.wav |
         """
         expected_sequence = list(expected_sequence)
 
