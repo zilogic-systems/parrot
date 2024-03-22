@@ -13,5 +13,5 @@ setup(
     packages=find_namespace_packages(),
     package_dir={'parrot':'.'},
     py_modules=['parrot.ADBController'],
-    install_requires=["pyserial", "robotframework"],
+    install_requires=["robotframework"],
 )
