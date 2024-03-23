@@ -137,8 +137,10 @@ class DTMF:
             raise Error("unsupported audio sample width")
 
         logger.write(np_data_type)
+        logger.write(f"max_dbFS = {sound.max_dBFS}")
 
-        tone_segs = pydub.silence.split_on_silence(sound, min_silence_len=10)
+        tone_segs = pydub.silence.split_on_silence(sound, min_silence_len=10,
+                                                   silence_thresh=sound.max_dBFS - 4)
         logger.write(tone_segs)
         logger.write(len(tone_segs))
 
