@@ -99,7 +99,7 @@ class RelayController:
         self.relay_interface.write("\r\n".encode())
         expect = "OK".encode()
         output = self.relay_interface.read_until(expect)
-        if output == expect:
+        if expect in output:
             return True
         return False
 
