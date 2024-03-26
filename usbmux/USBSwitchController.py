@@ -69,7 +69,7 @@ class USBSwitchController:
         return self._verify_execution()
 
     @keyword("Switch Connect")
-    def switch_connect(self, device: str = "/dev/ttyUSB0") -> bool:
+    def switch_connect(self, device: str) -> None:
         """Opens connection to Switch Controller.
 
         The Switch Controller to connect to is specified by ``device``. This is
@@ -95,10 +95,9 @@ class USBSwitchController:
 
         except (serial.SerialException, FileNotFoundError) as error:
             raise Error("Serial Connection Failed") from error
-        return True
 
     @keyword("Switch Disconnect")
-    def switch_disconnect(self) -> bool:
+    def switch_disconnect(self) -> None:
         """Closes connection to the Switch Controller."""
 
         try:
@@ -106,46 +105,49 @@ class USBSwitchController:
 
         except (serial.SerialException, AttributeError) as error:
             raise Error("No Device Connected") from error
-        return True
 
     @keyword("Switch Connect USB Device Port to Host Port")
-    def switch_connect_usb_device_to_host(self, host_port='0', device_port='00') -> bool:
+    def switch_connect_usb_device_to_host(self, host_port: int, device_port: int) -> None:
         """Connects the host with the device port.
 
             - ``host_port``: Host port  is either ``0`` or ``1``.
-            - ``device_port``: Device port is two digit number from ``00 - 07``.
+            - ``device_port``: Device port ranges from ``0 - 7``.
 
         *Example*
 
-        | Switch Connect USB Device Port to Host Port   | 0 | 01 |
+        | Switch Connect USB Device Port to Host Port   | 0 | 1 |
 
         """
-        if self._switch(f"H{host_port}"):
-            return self._switch(f"O{device_port}")
-        return False
+        if self._switch(f"H{host_port}") and self._switch(f"O0{device_port}"):
+            return
+        raise Error(f"Failed to Connect the {host_port} with {device_port}")
 
     @keyword("Switch Disconnect USB Device Port to Host Port")
-    def switch_disconnect_usb_device_to_host(self, device_port="00") -> bool:
+    def switch_disconnect_usb_device_to_host(self, device_port: int) -> None:
         """Disconnects the USB device port from the host port.
 
-            - ``device_port``: Device port is two digit number from ``00 - 07``.
+            - ``device_port``: Device port ranges from ``0 - 7``.
 
         *Example*
 
-        | Switch Disconnect USB Device Port to Host Port    | 01 |
+        | Switch Disconnect USB Device Port to Host Port    | 1 |
 
         """
-        return self._switch(f"F{device_port}")
+        if self._switch(f"F0{device_port}"):
+            return
+        raise Error(f"Failed to Disconnect the {device_port}")
 
     @keyword("Switch Reset All")
-    def switch_reset_all(self) -> bool:
+    def switch_reset_all(self) -> None:
         """Resets the USB switch and disables all device ports.
 
         This keyword ``Switch Reset All`` should be used at the beginning and
         the end of the test case. By resetting all Switch it does not affect the
         next test case.
         """
-        return self._switch("A")
+        if self._switch("A"):
+            return
+        raise Error("Failed to Reset All Switch")
 
 
 def command_line_args():
