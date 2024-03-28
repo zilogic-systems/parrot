@@ -1,0 +1,8 @@
+test:
+  image: debian:bullseye-slim
+  script:
+    - apt-get update
+    - apt-get install python3-pip -y
+    - pip3 install ./ocr ./relay ./usbmux
+    - export PYTHONPATH=$PWD/test
+    - python3 -m robot --outputdir build test
