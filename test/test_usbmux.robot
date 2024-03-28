@@ -1,6 +1,6 @@
 ** Settings **
 
-Library  SerialMock
+Library  MockUtil.SerialMock
 Library  parrot.USBSwitchController
 Test Setup  Setup
 Test Teardown  Teardown

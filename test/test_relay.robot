@@ -1,6 +1,6 @@
 ** Settings **
 
-Library  SerialMock
+Library  MockUtil.SerialMock
 Library  parrot.RelayController
 Test Setup  Setup
 Test Teardown  Teardown

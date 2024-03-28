@@ -1,6 +1,7 @@
 import unittest.mock
 
 import serial
+import pytesseract
 from robot.api.logger import console
 
 class Error(Exception):
@@ -31,3 +32,20 @@ class SerialMock:
 
     def teardown(self):
         self.serial_patcher.stop()
+
+
+class TesseractMock:
+    ROBOT_LIBRARY_SCOPE = "TEST"
+
+    def setup(self):
+        self.open_patcher = unittest.mock.patch("PIL.Image.open")
+        self.image_to_data_patcher = unittest.mock.patch("pytesseract.image_to_data")
+        self.mock_open = self.open_patcher.start()
+        self.mock_image_to_data = self.image_to_data_patcher.start()
+
+    def set_image_data(self, data):
+        self.mock_image_to_data.return_value = {"text" : data.split(" ")}
+
+    def teardown(self):
+        self.open_patcher.stop()
+        self.image_to_data_patcher.stop()
