@@ -2,6 +2,7 @@ import unittest.mock
 
 import serial
 import pytesseract
+import pyzbar
 from robot.api.logger import console
 
 class Error(Exception):
@@ -49,3 +50,22 @@ class TesseractMock:
     def teardown(self):
         self.open_patcher.stop()
         self.image_to_data_patcher.stop()
+
+
+class PyzbarMock:
+    ROBOT_LIBRARY_SCOPE = "TEST"
+
+    def setup(self):
+        self.open_patcher = unittest.mock.patch("PIL.Image.open")
+        self.qr_decode_patcher = unittest.mock.patch("pyzbar.pyzbar.decode")
+        self.mock_open = self.open_patcher.start()
+        self.mock_qr_decode = self.qr_decode_patcher.start()
+
+    def set_qrcode_data(self, data):
+        self.mock_obj = unittest.mock.Mock()
+        self.mock_obj.data = data.encode()
+        self.mock_qr_decode.return_value = [self.mock_obj]
+
+    def teardown(self):
+        self.open_patcher.stop()
+        self.qr_decode_patcher.stop()
