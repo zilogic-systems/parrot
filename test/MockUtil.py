@@ -1,8 +1,8 @@
 import unittest.mock
-
 import serial
 import pytesseract
 import pyzbar
+import subprocess
 from robot.api.logger import console
 
 class Error(Exception):
@@ -34,7 +34,6 @@ class SerialMock:
     def teardown(self):
         self.serial_patcher.stop()
 
-
 class TesseractMock:
     ROBOT_LIBRARY_SCOPE = "TEST"
 
@@ -50,7 +49,6 @@ class TesseractMock:
     def teardown(self):
         self.open_patcher.stop()
         self.image_to_data_patcher.stop()
-
 
 class PyzbarMock:
     ROBOT_LIBRARY_SCOPE = "TEST"
@@ -69,3 +67,30 @@ class PyzbarMock:
     def teardown(self):
         self.open_patcher.stop()
         self.qr_decode_patcher.stop()
+
+class SubprocessMock:
+    ROBOT_LIBRARY_SCOPE = "TEST"
+
+    def setup(self):
+        self.subprocess_patcher = unittest.mock.patch("subprocess.run")
+        self.mock_run = self.subprocess_patcher.start()
+
+    def set_adb_response(self, returncode: int, stdout:str=""):
+        mock_resp = unittest.mock.Mock()
+        mock_resp.stdout = stdout
+        mock_resp.stderr = ""
+        mock_resp.returncode = returncode
+        self.mock_run.return_value = mock_resp
+
+    def verify_adb_command(self, cmd: list):
+        written = []
+        for call in self.mock_run.call_args_list:
+            written.append(call[0][0])
+        if cmd in written:
+            position = written.index(cmd)
+            if cmd != written[position]:
+                raise Error(f"Command expected is {cmd} for got {written[position]}")
+        self.mock_run.call_args_list.clear()
+
+    def teardown(self):
+        self.subprocess_patcher.stop()

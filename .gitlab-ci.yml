@@ -3,6 +3,6 @@ test:
   script:
     - apt-get update
     - apt-get install python3-pip libzbar0 -y
-    - pip3 install ./ocr ./qrcode ./relay ./usbmux
+    - pip3 install ./adb ./ocr ./qrcode ./relay ./usbmux
     - export PYTHONPATH=$PWD/test
     - python3 -m robot --outputdir build test
