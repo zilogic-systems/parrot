@@ -86,10 +86,8 @@ class SubprocessMock:
         written = []
         for call in self.mock_run.call_args_list:
             written.append(call.args[0])
-        if cmd in written:
-            position = written.index(cmd)
-            if cmd != written[position]:
-                raise Error(f"Command expected is {cmd} for got {written[position]}")
+        if cmd not in written:
+            raise Error(f"Command expected is {cmd} got {written}")
         self.mock_run.call_args_list.clear()
 
     def teardown(self):
