@@ -23,7 +23,7 @@ class SerialMock:
         s = self.MockSerial()
         written = []
         for call in s.write.call_args_list:
-            written.append(call[0][0])
+            written.append(call.args[0])
         written = b"".join(written)
         expected = expected.encode("utf-8")
         if expected != written:
@@ -85,7 +85,7 @@ class SubprocessMock:
     def verify_adb_command(self, cmd: list):
         written = []
         for call in self.mock_run.call_args_list:
-            written.append(call[0][0])
+            written.append(call.args[0])
         if cmd in written:
             position = written.index(cmd)
             if cmd != written[position]:
