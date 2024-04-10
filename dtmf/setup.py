@@ -4,7 +4,7 @@ from setuptools import find_packages
 from os import path
 
 setup(
-    name='parrot-dtmf',
+    name='robotframework-parrot-dtmf',
     version='1.0.0',
     license="Apache License 2.0",
     url="https://github.com/zilogic-systems/parrot",

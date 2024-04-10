@@ -5,7 +5,7 @@
 To install from package registry use the following command:
 
 -----
-$ pip install parrot-usbswitchcontroller
+$ pip install robotframework-parrot-usbswitchcontroller
 -----
 
 To install from git use the following command:

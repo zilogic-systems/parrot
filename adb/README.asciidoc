@@ -5,7 +5,7 @@
 To install from package registry use the following command:
 
 -----
-$ pip install parrot-adbcontroller
+$ pip install robotframework-parrot-adbcontroller
 -----
 
 To install from git repo use the following command:

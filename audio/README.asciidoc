@@ -5,7 +5,7 @@
 To install from package registry use the following command:
 
 -----
-$ pip install parrot-audio
+$ pip install robotframework-parrot-audio
 -----
 
 To install from git repo use the following command:
