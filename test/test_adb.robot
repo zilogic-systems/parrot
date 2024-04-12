@@ -76,7 +76,7 @@ Test ADB Play MP3 File Success
     Set ADB Response    0
     ADB IP Connect    10.42.0.206
     ADB Play MP3 File    song.mp3
-    Verify ADB Command    ['adb', '-s', '10.42.0.206', 'shell', 'am', 'start', '-a', 'android.intent.action.VIEW', '-d', 'song.mp3', '-t', 'audio/mp3']
+    Verify ADB Command    ['adb', '-s', '10.42.0.206', 'shell', 'am', 'start', '-a', 'android.intent.action.VIEW', '-d', 'file://song.mp3', '-t', 'audio/mp3']
 
 Test ADB Play Pause Music File Success
     Set ADB Response    0
@@ -142,7 +142,7 @@ Test ADB Chrome Success
     Set ADB Response    0
     ADB IP Connect    10.42.0.206
     ADB Chrome    song.mp3
-    Verify ADB Command    ['adb', '-s', '10.42.0.206', 'shell', 'am', 'start', '-n', 'com.android.chrome/com.google.android.apps.chrome.Main', '-d', 'file:///song.mp3']
+    Verify ADB Command    ['adb', '-s', '10.42.0.206', 'shell', 'am', 'start', '-n', 'com.android.chrome/com.google.android.apps.chrome.Main', '-d', 'file://song.mp3']
 
 Test ADB Get Current Application Package Name Success
     Set ADB Response    0    Proc#0:fgT/A/TOPLCMNt:028240:com.android.vending/u0a161(top-activity)
