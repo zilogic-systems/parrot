@@ -378,7 +378,7 @@ class ADBController:
         | ADB Play MP3 File | /storage/emulated/0/audio/song.mp3 |
 
         """
-        cmd = ['am', 'start', '-a', 'android.intent.action.VIEW', '-d', f'file:///{mp3file}', '-t', 'audio/mp3']
+        cmd = ['am', 'start', '-a', 'android.intent.action.VIEW', '-d', f'file://{mp3file}', '-t', 'audio/mp3']
         self.adb_shell(cmd)
         cmd = ['input', 'keyevent', '126']
         self.adb_shell(cmd)
@@ -566,7 +566,7 @@ class ADBController:
 
         | ADB Chrome | /storage/emulated/0/manual.pdf |
         """
-        cmd = ['am', 'start', '-n', 'com.android.chrome/com.google.android.apps.chrome.Main', '-d', f'file:///{file_path}']
+        cmd = ['am', 'start', '-n', 'com.android.chrome/com.google.android.apps.chrome.Main', '-d', f'file://{file_path}']
         self.adb_shell(cmd)
         return
 
