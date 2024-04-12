@@ -65,7 +65,7 @@ def verify_qr_code_text(image_path: str, expected_text: str)-> bool:
 
     *Example*
 
-    | Verify Image Contains QRCode | /home/user/Pictures/frame.png | Zilogic Systems |
+    | QR Code Verify Image Contains | /home/user/Pictures/frame.png | Zilogic Systems |
     """
     image_path = os.path.join(image_path)
     img = Image.open(image_path)
