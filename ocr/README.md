@@ -1,6 +1,6 @@
-= OCR Library
+# OCR Library
 
-== Installation
+## Installation
 
 This OCR Library uses Tesseract internally. Please install Tesseract from
 https://github.com/tesseract-ocr/tesseract or through your Operating Systems
@@ -8,16 +8,16 @@ package manager.
 
 To install from package registry use the following command:
 
------
+```
 $ pip install robotframework-parrot-ocrlib
------
+```
 
 To install from git repo use the following command:
 
------
+```
 $ pip install .
------
+```
     
-== Example
+## Example
 
 Example of using the library in Robot Framework is available `example.robot`.
