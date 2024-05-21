@@ -6,3 +6,20 @@ test:
     - pip3 install ./adb ./ocr ./qrcode ./relay ./usbmux ./dtmf
     - export PYTHONPATH=$PWD/test
     - python3 -m robot --outputdir build test
+
+android-agent:
+  image: debian:bullseye-slim
+  script:
+    - apt-get update
+    - apt-get install -y python3-pip openjdk-17-jdk git curl zip unzip autoconf libtool autopoint automake libltdl-dev libssl-dev libffi-dev
+    - pip3 install --upgrade pip 
+    - pip install buildozer Cython python-for-android
+    - cd android-agent/
+    - yes | buildozer -v android debug > ${CI_PROJECT_DIR}/agent-log.txt 2>&1 || true
+    - ls bin/*.apk
+  artifacts:
+    paths:
+      - ${CI_PROJECT_DIR}/bin/*.apk
+      - ${CI_PROJECT_DIR}/agent-log.txt
+    expire_in: 1 day
+    when: always
