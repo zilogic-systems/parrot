@@ -12,20 +12,20 @@ class AndroidAgent(App):
     def __init__(self, port:int=8080, host:str="0.0.0.0"):
         super().__init__()
         self.server = SimpleXMLRPCServer((host,port))
-        self._enable_permission()
+        self.bluetooth_interface = BluetoothInterface()
+        self.permission_controller = PermissionController()
         self._register_methods()
         self.server_thread = threading.Thread(target=self.server.serve_forever)
-
-    def _enable_permission(self):
-        permission_controller = PermissionController()
-        permission_controller.request_bluetooth()
-        permission_controller.request_location()
         
     def _register_methods(self):
-        bluetooth_interface = BluetoothInterface()
-        self.server.register_function(bluetooth_interface.enable,'enable')
-        self.server.register_function(bluetooth_interface.disable,'disable')
-        self.server.register_function(bluetooth_interface.get_state,'get_state')
+        self.server.register_function(self.permission_controller.request_bluetooth,'request_ble')
+        self.server.register_function(self.permission_controller.request_location,'request_loc')
+        self.server.register_function(self.bluetooth_interface.enable,'enable')
+        self.server.register_function(self.bluetooth_interface.disable,'disable')
+        self.server.register_function(self.bluetooth_interface.get_state,'get_state')
+        self.server.register_function(self.bluetooth_interface.start_scan,'scan')
+        self.server.register_function(self.bluetooth_interface.paired_device,'paired_device')
+        self.server.register_function(self.bluetooth_interface.un_pair,'un_pair')
 
     def build(self):
         self.server_thread.start()

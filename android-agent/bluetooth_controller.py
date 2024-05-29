@@ -1,7 +1,9 @@
-from jnius import autoclass, cast
+from jnius import autoclass
 from android.broadcast import BroadcastReceiver
+from android.runnable import run_on_ui_thread
 from typing import Any,Union
 from kivy.logger import Logger
+
 BluetoothDevice = autoclass('android.bluetooth.BluetoothDevice')
 
 class BluetoothController:
@@ -40,14 +42,14 @@ class BluetoothController:
             print("SCANNING STARTED ")
 
         elif action == self.FOUND:
-            device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+            device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
             name = intent.getExtra(BluetoothDevice.EXTRA_NAME)
             self.device_scanned_count =+ 1
             if device:
                 print("SCANNING : ", name, device.toString())
                 if not name:
                     name = ""
-            self.scanned_devices.add(BluetoothController.BluethoothDevice(name, device.toString()))
+            self.scanned_devices.add(BluetoothController.BluethoothDevice(name, device.toString()).name)
 
         elif action == self.FINISHED:
             self.ble_adapter.cancelDiscovery()
@@ -57,13 +59,17 @@ class BluetoothController:
 
     def enable_adapter(self) -> bool:
         if (self.ble_adapter and not self.ble_adapter.isEnabled()):
-            return self.ble_adapter.enable()
+            self.ble_adapter.enable()
+            return True
+        return False
 
     def disable_adapter(self)->bool:
         if (self.ble_adapter and self.ble_adapter.isEnabled()):
-            return self.ble_adapter.disable()
+            self.ble_adapter.disable()
+            return True
+        return False
 
-    def paired_devices(self):
+    def paired_devices(self)->dict:
         if self.ble_adapter:
             bounded_devices = self.ble_adapter.getBondedDevices().toArray()
             response = {}
@@ -71,11 +77,16 @@ class BluetoothController:
                 response = {**response , device.getName() : device.getAddress()}
         return response
 
-    def scan(self):
+    @run_on_ui_thread
+    def start_broadcastlistner(self):
         actions = [self.FOUND, self.STARTED, self.FINISHED]
         self.boardcast_receiver = BroadcastReceiver(self.on_scanning, actions=actions)
-        self.boardcast_receiver.start()
         self.ble_adapter.startDiscovery()
+        self.boardcast_receiver.start()
+
+    def scan(self)-> bool:
+        self.start_broadcastlistner()
+        return True
 
     def is_device_paired(self, remote_info: dict) -> bool:
         name = remote_info.get("name", "").lower()
@@ -88,13 +99,15 @@ class BluetoothController:
             return False
 
         filtered_devices = filter(equals, bounded_devices)
-        return (True,filtered_devices[0]) if len(filtered_devices) else (False, None)
+        return (True,filtered_devices[0]) if len(filtered_devices) else (False)
 
-    def pair(self, mac_address: str):
+    def pair(self, mac_address: str) -> bool:
         if self.ble_adapter and mac_address.strip() != "":
             device = self.ble_adapter.getRemoteDevice(mac_address)
             if device and device.getBondState() != BluetoothDevice.BOND_BONDED:
                 device.createBond()
+                return True
+        return False
 
     def connect(self, device_info: dict = {}):
         self.connected_device = None
@@ -118,9 +131,16 @@ class BluetoothController:
         if self.ble_adapter and address.strip():
             device = self.ble_adapter.getRemoteDevice(address)
             if (device.getBondState() == BluetoothDevice.BOND_BONDED):
-                   device.removeBond();
+                   device.removeBond()
+                   return True
+        return False
     
     def get_state(self):
         device = self.ble_adapter.getState()
-
-        return device
+        device_state = {
+            self.BluetoothAdapter.STATE_OFF : 0,
+            self.BluetoothAdapter.STATE_ON : 1,
+            self.BluetoothAdapter.STATE_TURNING_OFF : 2,
+            self.BluetoothAdapter.STATE_TURNING_ON : 3
+        }
+        return device_state[device]
