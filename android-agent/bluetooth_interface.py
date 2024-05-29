@@ -28,3 +28,11 @@ class BluetoothInterface:
     def un_pair(self, address):
         Logger.info("Un pair device")
         return self.bluetooth_controller.unpair(address)
+
+    def get_pair_state(self, mac_address: str):
+        Logger.info("Gets the device bonding state with the Remote device")
+        return self.bluetooth_controller.get_pair_state(mac_address)
+
+    def get_scan_state(self):
+        Logger.info("Gets the current device discovery state")
+        return self.bluetooth_controller.get_scan_state()

@@ -144,3 +144,17 @@ class BluetoothController:
             self.BluetoothAdapter.STATE_TURNING_ON : 3
         }
         return device_state[device]
+
+    def get_pair_state(self, mac_address: str) -> int:
+        device = self.ble_adapter.getRemoteDevice(mac_address)
+        device_state = {
+            BluetoothDevice.BOND_NONE : 0,
+            BluetoothDevice.BOND_BONDING : 1,
+            BluetoothDevice.BOND_BONDED : 2
+        }
+        return device_state[device.getBondState()]
+
+    def get_scan_state(self) -> bool:
+        if self.ble_adapter:
+            return self.ble_adapter.isDiscovering()
+        return False

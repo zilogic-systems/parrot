@@ -26,6 +26,8 @@ class AndroidAgent(App):
         self.server.register_function(self.bluetooth_interface.start_scan,'scan')
         self.server.register_function(self.bluetooth_interface.paired_device,'paired_device')
         self.server.register_function(self.bluetooth_interface.un_pair,'un_pair')
+        self.server.register_function(self.bluetooth_interface.get_pair_state, 'pair_state')
+        self.server.register_function(self.bluetooth_interface.get_scan_state, 'scan_state')
 
     def build(self):
         self.server_thread.start()
