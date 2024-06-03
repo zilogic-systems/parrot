@@ -59,14 +59,12 @@ class BluetoothController:
 
     def enable_adapter(self) -> bool:
         if (self.ble_adapter and not self.ble_adapter.isEnabled()):
-            self.ble_adapter.enable()
-            return True
+            return self.ble_adapter.enable()
         return False
 
     def disable_adapter(self)->bool:
         if (self.ble_adapter and self.ble_adapter.isEnabled()):
-            self.ble_adapter.disable()
-            return True
+            return self.ble_adapter.disable()
         return False
 
     def paired_devices(self)->dict:
