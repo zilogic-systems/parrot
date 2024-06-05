@@ -36,3 +36,6 @@ class BluetoothInterface:
     def get_scan_state(self):
         Logger.info("Gets the current device discovery state")
         return self.bluetooth_controller.get_scan_state()
+
+    def cancel_scan(self):
+        return self.bluetooth_controller.cancel_scan()

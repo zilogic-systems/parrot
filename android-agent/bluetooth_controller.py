@@ -156,3 +156,8 @@ class BluetoothController:
         if self.ble_adapter:
             return self.ble_adapter.isDiscovering()
         return False
+
+    def cancel_scan(self) ->bool:
+        if self.ble_adapter.isDiscovering():
+            return self.ble_adapter.cancelDiscovery()
+        return False
