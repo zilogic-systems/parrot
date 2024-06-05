@@ -18,8 +18,6 @@ class AndroidAgent(App):
         self.server_thread = threading.Thread(target=self.server.serve_forever)
         
     def _register_methods(self):
-        self.server.register_function(self.permission_controller.request_bluetooth,'request_ble')
-        self.server.register_function(self.permission_controller.request_location,'request_loc')
         self.server.register_function(self.bluetooth_interface.enable,'enable')
         self.server.register_function(self.bluetooth_interface.disable,'disable')
         self.server.register_function(self.bluetooth_interface.get_state,'get_state')
@@ -32,6 +30,7 @@ class AndroidAgent(App):
     def build(self):
         self.server_thread.start()
         Window.bind(on_request_close=self.on_request_close)
+        self.permission_controller.request_bluetooth_permissions()
         return Label(text='Zilogic Systems')
 
     def on_request_close(self,*args):
