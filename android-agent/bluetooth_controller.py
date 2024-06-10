@@ -33,7 +33,7 @@ class BluetoothController:
         self.STARTED = self.BluetoothAdapter.ACTION_DISCOVERY_STARTED
         self.FINISHED = self.BluetoothAdapter.ACTION_DISCOVERY_FINISHED
 
-    def on_scanning(self, context, intent):
+    def on_bluetooth_event(self, context, intent):
         action = intent.getAction()
         if action == self.STARTED:
             self.device_scanned_count = 0
@@ -76,14 +76,15 @@ class BluetoothController:
         return response
 
     @run_on_ui_thread
-    def start_broadcastlistner(self):
-        actions = [self.FOUND, self.STARTED, self.FINISHED]
-        self.boardcast_receiver = BroadcastReceiver(self.on_scanning, actions=actions)
+    def start_broadcastlistner(self, action):
+        actions = action
+        self.boardcast_receiver = BroadcastReceiver(self.on_bluetooth_event, actions=actions)
         self.ble_adapter.startDiscovery()
         self.boardcast_receiver.start()
 
-    def scan(self)-> bool:
-        self.start_broadcastlistner()
+    def scan(self):
+        actions = [self.FOUND, self.STARTED, self.FINISHED]
+        self.start_broadcastlistner(actions)
         return True
 
     def is_device_paired(self, remote_info: dict) -> bool:
@@ -99,12 +100,11 @@ class BluetoothController:
         filtered_devices = filter(equals, bounded_devices)
         return (True,filtered_devices[0]) if len(filtered_devices) else (False)
 
-    def pair(self, mac_address: str) -> bool:
+    def start_pair(self, mac_address: str) -> bool:
         if self.ble_adapter and mac_address.strip() != "":
             device = self.ble_adapter.getRemoteDevice(mac_address)
             if device and device.getBondState() != BluetoothDevice.BOND_BONDED:
-                device.createBond()
-                return True
+                return device.createBond()
         return False
 
     def connect(self, device_info: dict = {}):

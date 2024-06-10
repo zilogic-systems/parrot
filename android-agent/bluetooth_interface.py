@@ -39,3 +39,7 @@ class BluetoothInterface:
 
     def cancel_scan(self):
         return self.bluetooth_controller.cancel_scan()
+
+    def start_pair(self, mac_address):
+        Logger.info("Start the pairing process with the remote device")
+        return self.bluetooth_controller.start_pair(mac_address)
