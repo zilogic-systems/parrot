@@ -23,3 +23,6 @@ android-agent:
       - ${CI_PROJECT_DIR}/agent-log.txt
     expire_in: 1 day
     when: always
+  rules:
+    - changes:
+      - ${CI_PROJECT_DIR}/android-agent/**/*
